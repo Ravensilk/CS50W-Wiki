@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        {% if messages %}
+            <div class="col-10">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %} {% if message.tags == 'success' %} alert-success {% elif message.tags == 'error' %} alert-danger {% else %} alert-warning {% endif %} {% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="col-10">{{ entry|safe }}</div>
+        <div class="col-10"><a href="{% url 'edit' title %}"><button class="btn btn-secondary mt-2">Edit Entry</button></a></div>
+    </div>
+{% endblock %}

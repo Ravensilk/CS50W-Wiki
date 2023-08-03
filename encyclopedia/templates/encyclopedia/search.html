@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>Search Query Results</h1>
+    {% if query_list|length > 0 %}
+    <div class="d-flex align-items-end"><p>The following results came back with your query keyword: <pre class="mx-2 px-2 text-white bg-secondary">{{ query }}</pre></p></div>
+    {% endif %}
+    <ul>
+        {% for entry in query_list %}
+            <a href="{% url 'title' entry %}"><li>{{ entry }}</li></a>
+        {% empty %}
+            <li>No result for your search query.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

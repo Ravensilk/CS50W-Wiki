@@ -1,0 +1,29 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+Add New Entry
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-10">
+        <h1>Add New Entry</h1>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %} {% if message.tags == 'success' %} alert-success {% elif message.tags == 'error' %} alert-danger {% else %} alert-warning {% endif %} {% endif %} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="col-10">
+        <form action="{% url 'add' %}" method="post" class=" addbody">
+            {% csrf_token %}
+            {{ addform }}
+            <input type="submit" value="Add Entry" class="btn btn-secondary mt-2">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
